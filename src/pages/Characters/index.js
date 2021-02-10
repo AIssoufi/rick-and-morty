@@ -11,7 +11,7 @@ Characters.propTypes = {
 
 };
 
-Characters.defaultPros = {
+Characters.defaultProps = {
 
 };
 

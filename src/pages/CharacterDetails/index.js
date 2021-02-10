@@ -11,7 +11,7 @@ CharacterDetails.propTypes = {
 
 };
 
-CharacterDetails.defaultPros = {
+CharacterDetails.defaultProps = {
 
 };
 

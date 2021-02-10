@@ -1,17 +1,17 @@
 // Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const MainNav = ({ }) => (
   <nav>
     <ul>
       <li>
-        <Link to="/">Episodes</Link>
+        <NavLink to="/">Episodes</NavLink>
       </li>
       <li>
-        <Link to="/characters">Characters</Link>
+        <NavLink to="/characters">Characters</NavLink>
       </li>
     </ul>
   </nav>
@@ -21,7 +21,7 @@ MainNav.propTypes = {
 
 };
 
-MainNav.defaultPros = {
+MainNav.defaultProps = {
 
 };
 

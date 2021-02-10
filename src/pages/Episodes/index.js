@@ -11,7 +11,7 @@ Episodes.propTypes = {
 
 };
 
-Episodes.defaultPros = {
+Episodes.defaultProps = {
 
 };
 

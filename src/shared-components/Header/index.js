@@ -16,7 +16,7 @@ Header.propTypes = {
 
 };
 
-Header.defaultPros = {
+Header.defaultProps = {
 
 };
 
