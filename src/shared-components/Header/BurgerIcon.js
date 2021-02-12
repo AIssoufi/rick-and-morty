@@ -11,6 +11,8 @@ const Svg = styled.svg.attrs({
   -webkit-tap-highlight-color: transparent;
   transition: transform 400ms;
   user-select: none;
+  position: relative;
+  z-index: 2;
 
   ${props => (props.isActive ? css`transform: rotate(45deg);`: '')}
 `;

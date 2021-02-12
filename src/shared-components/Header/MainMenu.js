@@ -8,66 +8,103 @@ import styled, { css, keyframes } from 'styled-components'
 import SelectLang from './SelectLang';
 import SelectTheme from './SelectTheme';
 
-
-const fadeIn = keyframes`
-  0% {
-    height: 0;
-    padding: 0;
-  }
-  100% {
-    height: max-content;
-    padding: 0 var(--page-ppading) var(--page-ppading) var(--page-ppading);
-  }
-`
-
 const MenuContainer = styled.div`
-  display: flex;
+  display: ${({ show }) => show ? css`flex` : css`none` };;
   flex-direction: column;
   align-items: flex-end;
-  height: ${({ show }) => show ? css`max-content` : css`0` };
-  padding: ${({ show }) => show ? css`0 var(--page-ppading) var(--page-ppading) var(--page-ppading);` : css`0` };
-
-  ${({ show }) => {
-    if (show) return  css`animation: 0.5s ${fadeIn} ease;`
-    return '';
-  }};
-  overflow: hidden;
+  padding: 1rem 3rem 2.5rem 3rem;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background-color: red;
+  background-color: var(--bg-color);
   transition-property: height;
   transition-duration: 0.5s;
+  z-index: 2;
+`;
 
+const Nav = styled.nav`
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    & > :not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+`;
+
+const NavItem = styled.li`
+  list-style: none;
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+const Link = styled(NavLink).attrs({
+  activeClassName: 'is-active'
+})`
+  text-decoration: none;
+  color: var(--text-color-light);
+
+  &.is-active {
+    color: var(--text-color);
+  }
 `;
 
 const Separator = styled.hr`
-`
+  width: 15px;
+  border: 1px solid var(--gray-light);
+  margin: 1.5rem 0;
+`;
+
+const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  & > :not(:last-child)  {
+    margin-bottom: 1rem;
+  }
+`;
 
 
-const MainMenu = ({ display }) => (
+const MainMenu = ({ display, onNavLinkClick }) => (
   <MenuContainer show={display}>
-    <nav>
+    <Nav>
       <ul>
-        <li>
-          <NavLink to="/">Episodes</NavLink>
-        </li>
-        <li>
-          <NavLink to="/characters">Characters</NavLink>
-        </li>
+        <NavItem>
+          <Link
+            onClick={onNavLinkClick}
+            exact
+            to="/"
+          >
+            Episodes
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Link
+            onClick={onNavLinkClick}
+            to="/characters"
+          >
+            Characters
+          </Link>
+        </NavItem>
       </ul>
-    </nav>
+    </Nav>
     <Separator />
-    <div>
+    <SelectContainer>
       <SelectLang />
       <SelectTheme />
-    </div>
+    </SelectContainer>
   </MenuContainer>
 );
 
 MainMenu.propTypes = {
-  display: PropTypes.bool
+  display: PropTypes.bool,
+  onNavLinkClick: PropTypes.func.isRequired
 };
 
 MainMenu.defaultProps = {

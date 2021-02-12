@@ -10,14 +10,21 @@
   --text-color-light: var(--gray);
 
   /* Background */
+  --bg-color: var(--white);
   --gray-bg-color: rgba(196, 196, 196, 0.3);
   --gray-bg-color-light: rgba(229, 229, 229, 0.35);
 
   --page-ppading: 10px;
+
 }
 
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
 }

@@ -32,7 +32,7 @@ const Label = styled.span`
 const SingleValue = ({ children, ...props }) => (
   <components.SingleValue {...props}>
     <ThemeItem>
-      <ColoredCircle />
+      <ColoredCircle color={props.data.value} />
       <Label>{children}</Label>
     </ThemeItem>
   </components.SingleValue>
@@ -47,8 +47,13 @@ const IconOption = props => (
   </components.Option>
 );
 
-const SelectTheme = ({ currentLang, onChange }) => (
-  <Select
+const StyledSelect = styled(Select)`
+  width: 165px;
+`;
+
+const SelectTheme = ({ className }) => (
+  <StyledSelect
+    className={className}
     defaultValue={options[0]}
     options={options}
     components={{ Option: IconOption, SingleValue }}
@@ -56,12 +61,11 @@ const SelectTheme = ({ currentLang, onChange }) => (
 );
 
 SelectTheme.propTypes = {
-  currentLang: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  className: PropTypes.string
 };
 
 SelectTheme.defaultProps = {
-  isOpen: false
+  className: ''
 };
 
 export default SelectTheme;

@@ -3,8 +3,9 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
+import styled from 'styled-components';
 
 // Pages
 import {
@@ -16,26 +17,38 @@ import {
 // Shared components
 import Header from './shared-components/Header';
 
-// CSS
-import './App.css';
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-areas: "header" "main";
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+`;
+
+const Main = styled.main`
+  grid-area: "main";
+`;
 
 function App() {
   return (
     <Router>
-      <>
+      <Wrapper>
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <Episodes />
-          </Route>
-          <Route path="/characters">
-            <Characters />
-          </Route>
-          <Route path="/characters/:id">
-            <CharacterDetails />
-          </Route>
-        </Switch>
-      </>
+        <Main>
+          <Switch>
+            <Route exact strict path="/">
+              <Episodes />
+            </Route>
+            <Route stric path="/characters/:id">
+              <CharacterDetails />
+            </Route>
+            <Route strict path="/characters">
+              <Characters />
+            </Route>
+          </Switch>
+        </Main>
+      </ Wrapper>
     </Router>
   );
 }

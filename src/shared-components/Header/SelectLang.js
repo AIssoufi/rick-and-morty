@@ -1,7 +1,7 @@
 // Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Select, { components } from "react-select";
 
 const options = [
@@ -39,8 +39,13 @@ const IconOption = (props) => (
   </components.Option>
 );
 
-const SelectLang = ({ currentLang, onChange }) => (
-  <Select
+const StyledSelect = styled(Select)`
+  width: 150px;
+`;
+
+const SelectLang = ({ className }) => (
+  <StyledSelect
+    className={className}
     defaultValue={options[0]}
     options={options}
     components={{ Option: IconOption, SingleValue }}
@@ -48,12 +53,11 @@ const SelectLang = ({ currentLang, onChange }) => (
 );
 
 SelectLang.propTypes = {
-  currentLang: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  className: PropTypes.string,
 };
 
 SelectLang.defaultProps = {
-  isOpen: false
+  className: ''
 };
 
 export default SelectLang;
