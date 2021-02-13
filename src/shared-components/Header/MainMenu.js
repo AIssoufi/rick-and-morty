@@ -21,6 +21,18 @@ const MenuContainer = styled.div`
   transition-property: height;
   transition-duration: 0.5s;
   z-index: 2;
+
+  @media (min-width: 50em) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    padding: 0;
+  }
+
+  @media (min-width: 100em) {
+
+  }
 `;
 
 const Nav = styled.nav`
@@ -34,13 +46,23 @@ const Nav = styled.nav`
     & > :not(:last-child) {
       margin-bottom: 1rem;
     }
+
+    @media (min-width: 50em) {
+      flex-direction: row;
+      align-items: center;
+
+      & > :not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+    }
   }
 `;
 
 const NavItem = styled.li`
   list-style: none;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 `;
 
 const Link = styled(NavLink).attrs({
@@ -58,6 +80,12 @@ const Separator = styled.hr`
   width: 15px;
   border: 1px solid var(--gray-light);
   margin: 1.5rem 0;
+
+  @media (min-width: 50em) {
+    width: 0;
+    height: 15px;
+    margin: 0 1.5rem;
+  }
 `;
 
 const SelectContainer = styled.div`
@@ -67,6 +95,16 @@ const SelectContainer = styled.div`
 
   & > :not(:last-child)  {
     margin-bottom: 1rem;
+  }
+
+  @media (min-width: 50em) {
+    flex-direction: row;
+    align-items: center;
+
+    & > :not(:last-child) {
+      margin-bottom: 0;
+      margin-right: 1rem;
+    }
   }
 `;
 

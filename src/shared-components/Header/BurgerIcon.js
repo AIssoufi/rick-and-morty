@@ -15,6 +15,10 @@ const Svg = styled.svg.attrs({
   z-index: 2;
 
   ${props => (props.isActive ? css`transform: rotate(45deg);`: '')}
+
+  @media (min-width: 50em) {
+    display: none;
+  }
 `;
 
 const Line = styled.path`

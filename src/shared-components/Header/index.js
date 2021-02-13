@@ -17,16 +17,21 @@ const Logo = styled.h1`
 `;
 
 const HeaderContainer = styled.header`
-  grid-area: "header";
+  grid-area: header;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   flex: 1 1 0;
   position: relative;
+  background-color: var(--bg-color);
   padding: 5px calc(25px - 12px) 5px 25px;
 
   ${({ mobileMenuIsOpen }) => mobileMenuIsOpen ? css`
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
     &::after {
       content: '';
       position: absolute;
@@ -41,7 +46,7 @@ const HeaderContainer = styled.header`
 `;
 
 
-const Header = ({ }) => {
+const Header = () => {
   const [mobileMenuIsOpen, setIsOpenMobileMenuValue] = useState(false);
 
   const handleBurgerIconClick = () => {

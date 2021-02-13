@@ -14,8 +14,15 @@
   --gray-bg-color: rgba(196, 196, 196, 0.3);
   --gray-bg-color-light: rgba(229, 229, 229, 0.35);
 
-  --page-ppading: 10px;
+  --page-padding: 10px;
 
+  /* Font-weight */
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
 }
 
 body {

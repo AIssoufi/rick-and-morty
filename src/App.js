@@ -17,17 +17,17 @@ import {
 // Shared components
 import Header from './shared-components/Header';
 
-
 const Wrapper = styled.div`
   display: grid;
   grid-template-areas: "header" "main";
   grid-template-rows: 50px 1fr;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(25em, 1440px);
   height: 100vh;
+  justify-content: center;
 `;
 
 const Main = styled.main`
-  grid-area: "main";
+  grid-area: main;
 `;
 
 function App() {
