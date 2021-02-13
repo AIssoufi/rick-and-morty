@@ -75,6 +75,7 @@ const Pagination = ({ currentPage, pageCount, onPageChange }) => {
       />
       {pages.slice(min - 1, max).map(page => (
         <PaginationItem
+          key={page}
           isActive={page === currentPage}
           onClick={() => onPageChange(page)}
         >

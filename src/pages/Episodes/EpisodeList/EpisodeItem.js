@@ -6,6 +6,9 @@ import styled, { css } from 'styled-components';
 // Shared components
 import { Character } from 'shared-components';
 
+// Hooks
+import useWindowSize from "hooks/useWindowSize";
+
 // Svg
 import { ReactComponent as LeftIconSvg } from './arrow-left-circle.svg';
 import { ReactComponent as RightIconSvg } from './arrow-right-circle.svg';
@@ -124,14 +127,15 @@ const PageCount = styled.div`
 const EpisodeItem = ({ episode, name, airDate, characters }) => {
   const [limit, setLimit] = useState(characters.length);
   const [skip, setSkip] = useState(0);
+  const [ windowWidth ] = useWindowSize();
 
   useEffect(() => {
-    if (window.innerWidth > 1400) {
+    if (windowWidth >= 1400) {
       setLimit(7);
-    } else if (window.innerWidth > 700) {
+    } else if (windowWidth >= 700) {
       setLimit(5);
     }
-  }, [window.innerWidth]);
+  }, [windowWidth]);
 
   const handlePrevClick = () => {
     let newSkipValue = skip - limit;
