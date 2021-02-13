@@ -29,10 +29,6 @@ const MenuContainer = styled.div`
     position: static;
     padding: 0;
   }
-
-  @media (min-width: 100em) {
-
-  }
 `;
 
 const Nav = styled.nav`
@@ -73,6 +69,16 @@ const Link = styled(NavLink).attrs({
 
   &.is-active {
     color: var(--text-color);
+    text-decoration: solid;
+
+    &::after {
+      content: '';
+      position: relative;
+      display: block;
+      height: 2px;
+      bottom: -5px;
+      background-color: var(--text-color);
+    }
   }
 `;
 

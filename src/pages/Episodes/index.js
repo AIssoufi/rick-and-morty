@@ -1,6 +1,5 @@
 // Dependencies
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Services
@@ -17,7 +16,7 @@ const Wrapper = styled.section`
   height: 100%;
 `;
 
-const Episodes = ({ }) => {
+const Episodes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchResultCount, setSearchResultCount] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -33,12 +32,9 @@ const Episodes = ({ }) => {
       page: currentPage,
       includeCharacters: true
     }).then(response => {
-      console.log(response);
       const { info, results } = response;
-
       setPageCount(info.pages);
       setEpisodes(results);
-
     }).finally(() => {
       setEpisodeIsFetching(false);
     });
@@ -106,14 +102,6 @@ const Episodes = ({ }) => {
       }
     </Wrapper>
   )
-};
-
-Episodes.propTypes = {
-
-};
-
-Episodes.defaultProps = {
-
 };
 
 export default Episodes;

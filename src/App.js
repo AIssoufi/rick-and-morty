@@ -24,6 +24,10 @@ const Wrapper = styled.div`
   grid-template-columns: minmax(25em, 1440px);
   height: 100vh;
   justify-content: center;
+
+  @media (min-width: 50em) {
+    grid-template-rows: 70px 1fr;
+  }
 `;
 
 const Main = styled.main`

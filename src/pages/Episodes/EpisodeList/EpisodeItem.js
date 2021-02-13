@@ -24,8 +24,10 @@ const EpisodeContainer = styled.div`
 `;
 
 const Separator = styled.hr`
-  width: 10em;
-  border: 1px solid var(--black);
+  max-width: 200px;
+  height: 1px;
+  background-color: var(--black);
+  border: none;
   margin: 1.5rem auto;
 
   @media (min-width: 50em) {

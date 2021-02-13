@@ -43,6 +43,14 @@ const HeaderContainer = styled.header`
       background-color: rgba(0, 0, 0, 0.5);
     }
   ` : ''}
+
+  @media (min-width: 50em) {
+    padding: var(--page-padding);
+  }
+
+  @media (min-width: 100em) {
+    padding: var(--page-padding) 0;
+  }
 `;
 
 

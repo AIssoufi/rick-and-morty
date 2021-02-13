@@ -4,6 +4,8 @@
   --black: #000;
   --gray: #838383;
   --gray-light: #E5E5E5;
+  --green: #00880E;
+  --red: #FF0000;
 
   /* Text */
   --text-color: var(--black);
