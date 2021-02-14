@@ -34,6 +34,7 @@ const InputText = styled.input`
   border: none;
   height: 100%;
   background-color: transparent;
+  color: var(--text-color);
   &::placeholder {
     font-size: 14px;
   }
