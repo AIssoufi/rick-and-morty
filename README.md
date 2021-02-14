@@ -1,8 +1,11 @@
-# Rick and Morty project
+# Rick and Morty
+## Demo
 
-## Available Scripts
+Try this project online: [https://rick-et-morty.herokuapp.com](https://rick-et-morty.herokuapp.com)
 
-In the project directory, you can run:
+## Run on local
+
+In the project root directory, you can run:
 
 ### `npm start`
 
