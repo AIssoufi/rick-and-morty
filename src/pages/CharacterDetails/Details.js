@@ -27,7 +27,6 @@ const ImageContainer = styled.div`
   margin-bottom: 7px;
   width: 150px;
   height: 150px;
-  z-index: -1;
 
   --color: var(--${({ status }) => (status && status === 'Alive') ? 'green' : 'red'});
 
