@@ -8,9 +8,8 @@ import { useTranslation } from 'react-i18next';
 import Select, { controlStyle } from '../Select';
 
 const options = [
-  { value: 'white', label: 'Light theme' },
-  { value: 'gray', label: 'Gray theme' },
-  { value: 'black', label: 'Dark theme' },
+  { value: 'light', iconColor: 'white', label: 'Light theme' },
+  { value: 'dark', iconColor: 'black', label: 'Dark theme' },
 ];
 
 const ThemeItem = styled.div`
@@ -35,7 +34,7 @@ const Label = styled.span`
 const SingleValue = ({ children, ...props }) => (
   <components.SingleValue {...props}>
     <ThemeItem>
-      <ColoredCircle color={props.data.value} />
+      <ColoredCircle color={props.data.iconColor} />
       <Label>{children}</Label>
     </ThemeItem>
   </components.SingleValue>
@@ -44,7 +43,7 @@ const SingleValue = ({ children, ...props }) => (
 const IconOption = props => (
   <components.Option {...props}>
     <ThemeItem>
-      <ColoredCircle color={props.data.value} />
+      <ColoredCircle color={props.data.iconColor} />
       <Label>{props.data.label}</Label>
     </ThemeItem>
   </components.Option>
@@ -57,8 +56,12 @@ const customStyles = {
   }),
 };
 
-const SelectTheme = () => {
+const SelectTheme = ({ onChange, value }) => {
   const { t } = useTranslation();
+
+  const handleChange = ({ value }) => {
+    onChange(value);
+  };
 
   const opt = options.map(theme => ({
     ...theme,
@@ -67,7 +70,8 @@ const SelectTheme = () => {
 
   return (
     <Select
-      defaultValue={opt[0]}
+      value={options.find(theme => theme.value === value) || opt[0]}
+      onChange={handleChange}
       options={opt}
       components={{ Option: IconOption, SingleValue }}
       styles={customStyles}

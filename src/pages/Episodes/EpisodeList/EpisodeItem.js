@@ -26,7 +26,7 @@ const EpisodeContainer = styled.div`
 const Separator = styled.hr`
   max-width: 200px;
   height: 1px;
-  background-color: var(--black);
+  background-color: var(--text-color);
   border: none;
   margin: 1.5rem auto;
 

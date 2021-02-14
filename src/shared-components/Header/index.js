@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 // Child components
@@ -26,6 +27,7 @@ const HeaderContainer = styled.header`
   position: relative;
   background-color: var(--bg-color);
   padding: 5px calc(25px - 12px) 5px 25px;
+  z-index: 1;
 
   ${({ mobileMenuIsOpen }) => mobileMenuIsOpen ? css`
     position: sticky;
@@ -40,7 +42,7 @@ const HeaderContainer = styled.header`
       left: 0;
       right: 0;
       z-index: 1;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.8);
     }
   ` : ''}
 
@@ -54,7 +56,7 @@ const HeaderContainer = styled.header`
 `;
 
 
-const Header = () => {
+const Header = ({ onThemeChange, currentTheme }) => {
   const [mobileMenuIsOpen, setIsOpenMobileMenuValue] = useState(false);
   const [currentLang, setCurrentLang] = useState('');
   const { i18n } = useTranslation();
@@ -79,6 +81,8 @@ const Header = () => {
         onNavLinkClick={() => setIsOpenMobileMenuValue(false)}
         onLangChange={handleLangChange}
         currentLang={currentLang}
+        onThemeChange={onThemeChange}
+        currentTheme={currentTheme}
       />
       <BurgerIcon
         isOpen={mobileMenuIsOpen}
@@ -89,11 +93,8 @@ const Header = () => {
 };
 
 Header.propTypes = {
-
-};
-
-Header.defaultProps = {
-
+  onThemeChange: PropTypes.func.isRequired,
+  currentTheme: PropTypes.shape({}).isRequired
 };
 
 export default Header;

@@ -116,7 +116,9 @@ const SelectContainer = styled.div`
 `;
 
 
-const MainMenu = ({ display, onNavLinkClick, onLangChange, currentLang}) => {
+const MainMenu = ({
+  display, onNavLinkClick, onLangChange, currentLang, onThemeChange, currentTheme
+}) => {
   const { t } = useTranslation();
   return (
     <MenuContainer show={display}>
@@ -147,7 +149,10 @@ const MainMenu = ({ display, onNavLinkClick, onLangChange, currentLang}) => {
           onChange={onLangChange}
           value={currentLang}
         />
-        <SelectTheme />
+        <SelectTheme
+          onChange={onThemeChange}
+          value={currentTheme}
+        />
       </SelectContainer>
     </MenuContainer>
   );

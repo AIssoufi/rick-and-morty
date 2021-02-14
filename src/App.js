@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +18,14 @@ import {
 import Header from './shared-components/Header';
 
 const Wrapper = styled.div`
+  /* Theme */
+  --text-color: var(--${({ theme }) => theme.textColor});
+  --text-color-light: var(--${({ theme }) => theme.textColorLight});
+  --bg-color: var(--${({ theme }) => theme.bgColor});
+  --box-shadow-color: var(--${({ theme }) => theme.boxShadowColor});
+
+  color: var(--text-color);
+
   display: grid;
   grid-template-areas: "header" "main";
   grid-template-rows: 50px 1fr;
@@ -32,13 +40,40 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
   grid-area: main;
+  background-color: var(--bg-color);
 `;
 
+const theme = {
+  light: {
+    textColor: 'black',
+    textColorLight: 'gray',
+    bgColor: 'white',
+    boxShadowColor: 'black-shadow'
+  },
+  dark: {
+    textColor: 'white',
+    textColorLight: 'gray',
+    bgColor: 'black',
+    boxShadowColor: 'white-shadow'
+  }
+}
+
 function App() {
+  const [currentTheme, setCurrentTheme] = useState(theme.light);
+
+  const handleThemeChange = (themeName) => {
+    if (theme[themeName]) {
+      setCurrentTheme(theme[themeName]);
+    }
+  };
+
   return (
     <Router>
-      <Wrapper>
-        <Header />
+      <Wrapper theme={currentTheme}>
+        <Header
+          onThemeChange={handleThemeChange}
+          currentTheme={currentTheme}
+        />
         <Main>
           <Switch>
             <Route exact strict path="/">

@@ -22,7 +22,7 @@ const Container = styled.div`
     transform: scale(1);
     transition-property: transform;
     transition-delay: 1.3s;
-    z-index: -1;
+    z-index: 0;
     &:hover {
       transform: scale(1.3)
     }

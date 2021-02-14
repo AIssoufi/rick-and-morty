@@ -23,10 +23,7 @@ export const controlStyle = {
 
 export const dropdownIndicatorStyle = {
   color: 'var(--gray)',
-  display: 'flex',
-  padding: '0 5px 0 0',
-  transition: 'color 150ms',
-  boxSizing: 'border-box'
+  padding: '0 5px 0 0'
 };
 
 export const indicatorSeparatorStyle = {
@@ -34,14 +31,7 @@ export const indicatorSeparatorStyle = {
 };
 
 export const valueContainerStyle = {
-  alignItems: 'center',
-  display: 'flex',
-  flex: '1',
-  flexWrap: 'wrap',
-  padding: '0px 8px',
-  position: 'relative',
-  overflow: 'hidden',
-  boxSizing: 'border-box'
+  padding: '0px 8px'
 };
 
 export const singleValueStyle = {
@@ -59,15 +49,21 @@ export const singleValueStyle = {
   fontWeight: 'var(--font-weight-medium)'
 };
 
+export const menuStyle = {
+  backgroundColor: "var(--bg-color)",
+  boxShadow: "0 0 0 1px var(--box-shadow-color), 0 4px 11px var(--box-shadow-color)"
+}
+
 const CustomSelect = ({ styles, ...otherProps }) => (
   <Select
     {...otherProps}
     styles={{
       control: () => controlStyle,
-      dropdownIndicator: () => dropdownIndicatorStyle,
-      indicatorSeparator: () => indicatorSeparatorStyle,
-      valueContainer: () => valueContainerStyle,
-      singleValue: () => singleValueStyle,
+      dropdownIndicator: (provided) => ({...provided, ...dropdownIndicatorStyle }),
+      indicatorSeparator: (provided) => ({...provided, ...indicatorSeparatorStyle }),
+      valueContainer: (provided) => ({...provided, ...valueContainerStyle }),
+      singleValue: (provided) => ({...provided, ...singleValueStyle }),
+      menu: (provided) => ({...provided, ...menuStyle }),
       ...styles
     }}
   />

@@ -7,15 +7,15 @@
   --green: #00880E;
   --red: #FF0000;
 
-  /* Text */
-  --text-color: var(--black);
-  --text-color-light: var(--gray);
+  /* Shadow  */
+  --black-shadow: hsl(0deg 0% 0% / 10%);
+  --white-shadow: hsl(0deg 0% 100% / 10%);
 
   /* Background */
-  --bg-color: var(--white);
   --gray-bg-color: rgba(196, 196, 196, 0.3);
   --gray-bg-color-light: rgba(229, 229, 229, 0.35);
 
+  /* Page */
   --page-padding: 10px;
 
   /* Font-weight */

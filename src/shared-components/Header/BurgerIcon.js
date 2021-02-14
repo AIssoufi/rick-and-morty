@@ -24,7 +24,7 @@ const Svg = styled.svg.attrs({
 const Line = styled.path`
   fill: none;
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke: var(--black);
+  stroke: currentColor;
   stroke-width: 5.5;
   stroke-linecap: round;
 `;
