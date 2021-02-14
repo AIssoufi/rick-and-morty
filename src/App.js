@@ -26,13 +26,15 @@ const Wrapper = styled.div`
   --box-shadow-color: var(--${({ theme }) => theme.boxShadowColor});
 
   color: var(--text-color);
+  background-color: var(--bg-color);
 
   display: grid;
   grid-template-areas: "header" "main";
   grid-template-rows: 50px 1fr;
   grid-template-columns: minmax(25em, 1440px);
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
+  overflow-y: hidden;
 
   @media (min-width: 50em) {
     grid-template-rows: 70px 1fr;
