@@ -132,7 +132,7 @@ const CharacterSearch = ({ onChange, onSearch, resultCount, values }) => {
           />
         </FilterContainer>
       </InputContainer>
-      <Result>{t('characters.search.results.message', { count: resultCount })}</Result>
+      {resultCount ? <Result>{t('characters.search.results.message', { count: resultCount })}</Result>: null}
     </Form>
   );
 };

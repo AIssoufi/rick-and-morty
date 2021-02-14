@@ -55,7 +55,7 @@ const EpisodeSearch = ({ onChange, onSearch, resultCount, values }) => {
         onChange={handleNameChange}
         onSubmit={onSearch}
       />
-      <Result>{t('episodes.search.results.message', { count: resultCount })}</Result>
+      {resultCount ? <Result>{t('episodes.search.results.message', { count: resultCount })}</Result> : null}
     </Form>
   );
 }
