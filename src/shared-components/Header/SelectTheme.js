@@ -1,8 +1,11 @@
 // Dependencies
 import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components'
-import Select, { components } from "react-select";
+import styled from 'styled-components';
+import { components } from "react-select";
+import { useTranslation } from 'react-i18next';
+
+// Shared components
+import Select, { controlStyle } from '../Select';
 
 const options = [
   { value: 'white', label: 'Light theme' },
@@ -26,7 +29,7 @@ const ColoredCircle = styled.div`
 `;
 
 const Label = styled.span`
-  margin-left: 12px;
+  margin-left: 10px;
 `;
 
 const SingleValue = ({ children, ...props }) => (
@@ -47,25 +50,29 @@ const IconOption = props => (
   </components.Option>
 );
 
-const StyledSelect = styled(Select)`
-  width: 165px;
-`;
-
-const SelectTheme = ({ className }) => (
-  <StyledSelect
-    className={className}
-    defaultValue={options[0]}
-    options={options}
-    components={{ Option: IconOption, SingleValue }}
-  />
-);
-
-SelectTheme.propTypes = {
-  className: PropTypes.string
+const customStyles = {
+  control: () => ({
+    ...controlStyle,
+    width: '140px'
+  }),
 };
 
-SelectTheme.defaultProps = {
-  className: ''
+const SelectTheme = () => {
+  const { t } = useTranslation();
+
+  const opt = options.map(theme => ({
+    ...theme,
+    label: t(`theme.label.${theme.label.toLowerCase()}`, theme.label)
+  }));
+
+  return (
+    <Select
+      defaultValue={opt[0]}
+      options={opt}
+      components={{ Option: IconOption, SingleValue }}
+      styles={customStyles}
+    />
+  );
 };
 
 export default SelectTheme;

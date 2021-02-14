@@ -2,7 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Select, { components } from "react-select";
+import { components } from "react-select";
+
+// Shared components
+import Select from '../Select';
 
 const options = [
   { value: 'en-US', flag: '🇬🇧', label: 'English' },
@@ -15,7 +18,7 @@ const LangItem = styled.div`
 `;
 
 const Label = styled.span`
-  margin-left: 15px;
+  margin-left: 10px;
 `;
 
 const Flag = styled.span`
@@ -39,25 +42,24 @@ const IconOption = (props) => (
   </components.Option>
 );
 
-const StyledSelect = styled(Select)`
-  width: 150px;
-`;
+const SelectLang = ({ onChange, value }) => {
+  const handleChange = ({ value }) => {
+    onChange(value);
+  };
 
-const SelectLang = ({ className }) => (
-  <StyledSelect
-    className={className}
-    defaultValue={options[0]}
-    options={options}
-    components={{ Option: IconOption, SingleValue }}
-  />
-);
-
-SelectLang.propTypes = {
-  className: PropTypes.string,
+  return (
+    <Select
+      value={options.find(lang => lang.value === value) || options[0]}
+      onChange={handleChange}
+      options={options}
+      components={{ Option: IconOption, SingleValue }}
+    />
+  );
 };
 
-SelectLang.defaultProps = {
-  className: ''
+SelectLang.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 };
 
 export default SelectLang;

@@ -19,3 +19,14 @@ export const getCharacterById = ({
     return response;
   });
 };
+
+export const searchCharacters = ({
+  page = 1, name = '', status = '', gender = ''
+} = {}) => {
+  return get(`${process.env.REACT_APP_API_URL}/character`, {
+    page,
+    name,
+    status,
+    gender
+  });
+};

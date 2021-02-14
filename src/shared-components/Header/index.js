@@ -1,7 +1,7 @@
 // Dependencies
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 // Child components
 import MainMenu from './MainMenu';
@@ -56,10 +56,20 @@ const HeaderContainer = styled.header`
 
 const Header = () => {
   const [mobileMenuIsOpen, setIsOpenMobileMenuValue] = useState(false);
+  const [currentLang, setCurrentLang] = useState('');
+  const { i18n } = useTranslation();
 
   const handleBurgerIconClick = () => {
     setIsOpenMobileMenuValue(!mobileMenuIsOpen)
   };
+
+  const handleLangChange = (newLang) => {
+    setCurrentLang(newLang);
+  }
+
+  useEffect(() => {
+    i18n.changeLanguage(currentLang);
+  }, [currentLang]);
 
   return (
     <HeaderContainer mobileMenuIsOpen={mobileMenuIsOpen}>
@@ -67,6 +77,8 @@ const Header = () => {
       <MainMenu
         display={mobileMenuIsOpen}
         onNavLinkClick={() => setIsOpenMobileMenuValue(false)}
+        onLangChange={handleLangChange}
+        currentLang={currentLang}
       />
       <BurgerIcon
         isOpen={mobileMenuIsOpen}

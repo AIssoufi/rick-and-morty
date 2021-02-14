@@ -51,9 +51,11 @@ const Container = styled.div`
   }
 `
 
-const Pagination = ({ currentPage, pageCount, onPageChange }) => {
+const Pagination = ({ isFetching, currentPage, pageCount, onPageChange }) => {
+  if (isFetching) return null;
   if (typeof currentPage !== 'number') return null;
   if (typeof pageCount !== 'number') return null;
+  if (pageCount <= 1) return null;
 
   const pages = [];
 

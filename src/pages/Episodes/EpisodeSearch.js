@@ -2,12 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 // Shared components
 import { SearchInput } from 'shared-components';
 
 // Helpers
-import { getQueryParams } from 'helpers/form';
+import { getOnChangeValue } from 'helpers/form';
 
 
 const Form = styled.form`
@@ -30,25 +31,44 @@ const Form = styled.form`
 
 const Result = styled.div`
   text-align: center;
+  margin-top: 10px;
 `;
 
-const EpisodeSearch = ({ onSearch, resultCount }) => {
-  const handleSerach = (event) => {
-    const queryParams = getQueryParams(event)
-    onSearch(queryParams);
+const EpisodeSearch = ({ onChange, onSearch, resultCount, values }) => {
+  const { t } = useTranslation();
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    onSearch();
   };
 
+  const handleNameChange = (event) => {
+    onChange({ name: getOnChangeValue(event) });
+  }
+
   return (
-    <Form onSubmit={handleSerach}>
-      <SearchInput name="name" placeholder="Episode name" />
-      <Result>{resultCount ? `${resultCount} episode${resultCount > 1 ? 's have' : ' has'} been found` : ''}</Result>
+    <Form onSubmit={handleFormSubmit}>
+      <SearchInput
+        name="name"
+        placeholder={t('episodes.search.filters.name.placeholder')}
+        value={values.name || ''}
+        onChange={handleNameChange}
+        onSubmit={onSearch}
+      />
+      <Result>{t('episodes.search.results.message', { count: resultCount })}</Result>
     </Form>
   );
 }
 
 EpisodeSearch.propTypes = {
+  onChange: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
-  resultCount: PropTypes.number.isRequired
+  resultCount: PropTypes.number.isRequired,
+  values: PropTypes.shape({
+    name: PropTypes.string,
+    status: PropTypes.string,
+    gender: PropTypes.string,
+  })
 };
 
 export default EpisodeSearch;

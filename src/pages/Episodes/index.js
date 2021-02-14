@@ -18,36 +18,21 @@ const Wrapper = styled.section`
 
 const Episodes = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchResultCount, setSearchResultCount] = useState(null);
+  const [searchResultCount, setSearchResultCount] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [episodes, setEpisodes] = useState([]);
   const [episodeIsFetching, setEpisodeIsFetching] = useState(false);
+  const [queryParams, setQueryParams] = useState({});
 
-  const fetchEpisodes = () => {
-    if (episodeIsFetching) return;
-    setSearchResultCount(null);
-    setEpisodeIsFetching(true);
-
-    EpisodeService.getEpisodes({
-      page: currentPage,
-      includeCharacters: true
-    }).then(response => {
-      const { info, results } = response;
-      setPageCount(info.pages);
-      setEpisodes(results);
-    }).finally(() => {
-      setEpisodeIsFetching(false);
-    });
-  }
-
-  const searchEpisodes = ({ name }) => {
+  const searchEpisodes = () => {
     if (episodeIsFetching) return;
 
     setEpisodeIsFetching(true);
 
     EpisodeService.searchEpisodes({
-      name,
-      includeCharacters: true
+      page: currentPage,
+      includeCharacters: true,
+      ...queryParams
     }).then(response => {
       const { info, results } = response;
 
@@ -65,7 +50,7 @@ const Episodes = () => {
   }
 
   useEffect(() => {
-    fetchEpisodes();
+    searchEpisodes();
   }, [currentPage]);
 
 
@@ -77,29 +62,31 @@ const Episodes = () => {
   };
 
 
-  const handleSearch = ({ name = null }) => {
-    if (name) {
-      return searchEpisodes({ name });
-    }
-    return fetchEpisodes();
+  const onSearchFiltersChange = (newQueryParams = {}) => {
+    setQueryParams({
+      ...queryParams,
+      ...newQueryParams
+    });
   };
 
   return (
     <Wrapper>
       <EpisodeSearch
-        onSearch={handleSearch}
+        onSearch={searchEpisodes}
+        onChange={onSearchFiltersChange}
+        values={queryParams}
         resultCount={searchResultCount}
       />
       <EpisodeList
         episodes={episodes}
         isFetching={episodeIsFetching}
       />
-      {!episodeIsFetching && <Pagination
+      <Pagination
+        isFetching={episodeIsFetching}
         currentPage={currentPage}
         pageCount={pageCount}
         onPageChange={handlePageChange}
       />
-      }
     </Wrapper>
   )
 };

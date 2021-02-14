@@ -37,7 +37,7 @@ const CharacterDetails = () => {
       isFetching={characterIsFetching}
       {...character}
     />
-  )
+  );
 };
 
 export default CharacterDetails;

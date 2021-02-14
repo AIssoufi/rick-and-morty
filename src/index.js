@@ -1,7 +1,16 @@
+// Dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+// Components
 import App from './App';
+
+// i18n
+import './i18n';
+
+// Styles
+import './index.css';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

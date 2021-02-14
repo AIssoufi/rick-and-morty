@@ -49,16 +49,15 @@ const IconContainer = styled.button`
   align-items: center;
 `;
 
-const SearchInput = ({ name, placeholder }) => {
+const SearchInput = ({ onSubmit, ...otherProps}) => {
   return (
     <Container>
-      <IconContainer type="submit">
+      <IconContainer type="submit" onClick={onSubmit}>
         <SearchIcon />
       </IconContainer>
       <InputText
         type="text"
-        placeholder={placeholder}
-        name={name}
+        {...otherProps}
       />
     </Container>
   )
@@ -66,11 +65,13 @@ const SearchInput = ({ name, placeholder }) => {
 
 SearchInput.propTypes = {
   placeholder: PropTypes.string,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func
 };
 
 SearchInput.defaultProps = {
-  placeholder: 'Search...'
+  placeholder: 'Search...',
+  onSubmit: () => {}
 };
 
 export default SearchInput;

@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 // Hoc
 import { withLoading } from 'hoc/withLoading';
@@ -43,7 +44,7 @@ const ImageContainer = styled.div`
   }
 
   &::after {
-    content: '${({ status }) => status}';
+    content: '${({ statusText }) => statusText}';
     display: block;
     position: absolute;
     color: #FFF;
@@ -117,37 +118,39 @@ const Separator = styled.hr`
 `;
 
 const Details = ({
-  name, gender, imageUrl, status, species, location, origin, episodes
+  name, gender = '', imageUrl, status = '', species = '', location, origin, episodes
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
       <Header>
-        <ImageContainer status={status}>
+        <ImageContainer status={status} statusText={t(`character.status.${status.toLowerCase()}`, status)}>
           <Image src={imageUrl} alt={name} />
         </ImageContainer>
         <Name>{name}</Name>
       </Header>
       <Main>
         <Item>
-          <ItemLabel>Species</ItemLabel>
-          <ItemValue>{species}</ItemValue>
+          <ItemLabel>{t(`character.species`, 'Species')}</ItemLabel>
+          <ItemValue>{t(`character.species.${species.toLowerCase()}`, species)}</ItemValue>
         </Item>
         <Item>
-          <ItemLabel>Gender</ItemLabel>
-          <ItemValue>{gender}</ItemValue>
+          <ItemLabel>{t(`character.gender`, 'Gender')}</ItemLabel>
+          <ItemValue>{t(`character.gender.${gender.toLowerCase()}`, gender)}</ItemValue>
         </Item>
         <Separator />
         <Item>
-          <ItemLabel>Location</ItemLabel>
+          <ItemLabel>{t(`character.location`, 'Location')}</ItemLabel>
           <ItemValue>{location && location.name}</ItemValue>
         </Item>
         <Item>
-          <ItemLabel>Origin</ItemLabel>
+          <ItemLabel>{t(`character.origin`, 'Origin')}</ItemLabel>
           <ItemValue>{origin && origin.name}</ItemValue>
         </Item>
         <Separator />
         <div>
-          <ItemLabel>Episodes</ItemLabel>
+          <ItemLabel>{t(`character.episodes`, 'Episodes')}</ItemLabel>
           <List>
             {episodes.map(episode => (
               <ListItem>{episode.episode} · {episode.name}</ListItem>

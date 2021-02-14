@@ -2,7 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
+import { useTranslation } from 'react-i18next';
 
 //
 import SelectLang from './SelectLang';
@@ -115,36 +116,42 @@ const SelectContainer = styled.div`
 `;
 
 
-const MainMenu = ({ display, onNavLinkClick }) => (
-  <MenuContainer show={display}>
-    <Nav>
-      <ul>
-        <NavItem>
-          <Link
-            onClick={onNavLinkClick}
-            exact
-            to="/"
-          >
-            Episodes
-          </Link>
-        </NavItem>
-        <NavItem>
-          <Link
-            onClick={onNavLinkClick}
-            to="/characters"
-          >
-            Characters
-          </Link>
-        </NavItem>
-      </ul>
-    </Nav>
-    <Separator />
-    <SelectContainer>
-      <SelectLang />
-      <SelectTheme />
-    </SelectContainer>
-  </MenuContainer>
-);
+const MainMenu = ({ display, onNavLinkClick, onLangChange, currentLang}) => {
+  const { t } = useTranslation();
+  return (
+    <MenuContainer show={display}>
+      <Nav>
+        <ul>
+          <NavItem>
+            <Link
+              onClick={onNavLinkClick}
+              exact
+              to="/"
+            >
+              {t('header.menu.episodesLabel')}
+            </Link>
+          </NavItem>
+          <NavItem>
+            <Link
+              onClick={onNavLinkClick}
+              to="/characters"
+            >
+              {t('header.menu.charactersLabel')}
+            </Link>
+          </NavItem>
+        </ul>
+      </Nav>
+      <Separator />
+      <SelectContainer>
+        <SelectLang
+          onChange={onLangChange}
+          value={currentLang}
+        />
+        <SelectTheme />
+      </SelectContainer>
+    </MenuContainer>
+  );
+};
 
 MainMenu.propTypes = {
   display: PropTypes.bool,

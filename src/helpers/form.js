@@ -5,3 +5,5 @@ export const getQueryParams = event => {
   const queryParams = Object.fromEntries(formData.entries());
   return queryParams;
 };
+
+export const getOnChangeValue = event => event.target.value;

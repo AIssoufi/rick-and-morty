@@ -1,7 +1,6 @@
 // Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 // Hoc
 import { withLoading } from 'hoc/withLoading';
@@ -9,15 +8,10 @@ import { withLoading } from 'hoc/withLoading';
 // Components
 import EpisodeItem from './EpisodeItem';
 
-const EpisodeListContainer = styled.div`
-  @media (min-width: 50em) {
-  }
-`;
-
 const EpisodeList = ({ episodes }) => {
 
   return (
-    <EpisodeListContainer>
+    <div>
       {episodes.map(({ id, episode, name, airDate, characters }) => (
         <EpisodeItem
           key={id}
@@ -27,7 +21,7 @@ const EpisodeList = ({ episodes }) => {
           characters={characters}
         />
       ))}
-    </EpisodeListContainer>
+    </div>
   );
 };
 
