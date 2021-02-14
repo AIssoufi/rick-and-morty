@@ -49,7 +49,7 @@ const Container = styled.div`
       transform: scale(1.2);
     }
   }
-`
+`;
 
 const Pagination = ({ isFetching, currentPage, pageCount, onPageChange }) => {
   if (isFetching) return null;
@@ -89,7 +89,7 @@ const Pagination = ({ isFetching, currentPage, pageCount, onPageChange }) => {
       />
     </Container>
   );
-}
+};
 
 
 Pagination.propTypes = {

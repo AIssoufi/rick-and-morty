@@ -20,4 +20,4 @@ export const get = async (url, queryParams = {}) => {
     cache: 'default'
   })
     .then(response => response.json());
-}
+};

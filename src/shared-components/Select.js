@@ -52,7 +52,7 @@ export const singleValueStyle = {
 export const menuStyle = {
   backgroundColor: "var(--bg-color)",
   boxShadow: "0 0 0 1px var(--box-shadow-color), 0 4px 11px var(--box-shadow-color)"
-}
+};
 
 const CustomSelect = ({ styles, ...otherProps }) => (
   <Select

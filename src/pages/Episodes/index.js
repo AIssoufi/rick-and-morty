@@ -47,7 +47,7 @@ const Episodes = () => {
     .finally(() => {
       setEpisodeIsFetching(false);
     });
-  }
+  };
 
   useEffect(() => {
     searchEpisodes();

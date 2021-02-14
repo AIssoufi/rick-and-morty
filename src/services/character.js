@@ -13,7 +13,7 @@ export const getCharacterById = ({
         ...rest,
         imageUrl: image,
         episodes: resultsWithEpisodesDetails
-      }
+      };
     }
 
     return response;

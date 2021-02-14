@@ -46,7 +46,7 @@ const Characters = () => {
     .finally(() => {
       setCharacterIsFetching(false);
     });
-  }
+  };
 
   useEffect(() => {
     searchCharacters();

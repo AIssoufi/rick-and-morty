@@ -23,13 +23,13 @@ export const searchEpisodes = ({
           ...result,
           airDate: result.air_date,
           characters
-        }
+        };
       }));
 
       return {
         ...response,
         results: resultsWithCharDetails
-      }
+      };
     }
 
     return response;

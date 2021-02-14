@@ -1,3 +1,4 @@
+// Dependencies
 import { useLayoutEffect, useState } from 'react';
 
 function useWindowSize() {

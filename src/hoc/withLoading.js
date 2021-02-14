@@ -22,4 +22,4 @@ export const withLoading = (WrappedComponent) => {
   WithLoading.displayName = `WithLoading(${getDisplayName(WrappedComponent)})`;
 
   return WithLoading;
-}
+};

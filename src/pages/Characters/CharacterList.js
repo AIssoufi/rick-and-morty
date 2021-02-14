@@ -31,7 +31,6 @@ const CharacterListContainer = styled.div`
 `;
 
 const CharacterList = ({ characters }) => {
-
   return (
     <CharacterListContainer>
       {characters.map(({ id, image, name, species, status }) => (

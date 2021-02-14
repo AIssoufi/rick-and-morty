@@ -44,7 +44,7 @@ const EpisodeSearch = ({ onChange, onSearch, resultCount, values }) => {
 
   const handleNameChange = (event) => {
     onChange({ name: getOnChangeValue(event) });
-  }
+  };
 
   return (
     <Form onSubmit={handleFormSubmit}>

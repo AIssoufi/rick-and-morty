@@ -25,7 +25,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.div`
-  color: #000;
+  color: var(--text-color);
   margin: 5px 0;
   text-transform: uppercase;
   text-align: center;
@@ -39,12 +39,12 @@ const LineContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100px;
-`
+`;
 
 const Line = styled.span`
   width: 1px;
   height: 12px;
-  background: #000;
+  background: var(--text-color);
   margin: 0 1px;
   display: inline-block;
   animation: ${opacity} 1000ms infinite ease-in-out;

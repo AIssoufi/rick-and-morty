@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   /* Theme */
   --text-color: var(--${({ theme }) => theme.textColor});
   --text-color-light: var(--${({ theme }) => theme.textColorLight});
+
   --bg-color: var(--${({ theme }) => theme.bgColor});
   --box-shadow-color: var(--${({ theme }) => theme.boxShadowColor});
 
@@ -59,17 +60,17 @@ const theme = {
 }
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState(theme.light);
+  const [currentTheme, setCurrentTheme] = useState('light');
 
   const handleThemeChange = (themeName) => {
     if (theme[themeName]) {
-      setCurrentTheme(theme[themeName]);
+      setCurrentTheme(themeName);
     }
   };
 
   return (
     <Router>
-      <Wrapper theme={currentTheme}>
+      <Wrapper theme={theme[currentTheme]}>
         <Header
           onThemeChange={handleThemeChange}
           currentTheme={currentTheme}

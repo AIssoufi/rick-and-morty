@@ -93,7 +93,7 @@ const CharacterSearch = ({ onChange, onSearch, resultCount, values }) => {
 
   const handleNameChange = (event) => {
     onChange({ name: getOnChangeValue(event) });
-  }
+  };
 
   const statusOpt = statusOptions.map(s => ({
     ...s,
@@ -135,7 +135,7 @@ const CharacterSearch = ({ onChange, onSearch, resultCount, values }) => {
       <Result>{t('characters.search.results.message', { count: resultCount })}</Result>
     </Form>
   );
-}
+};
 
 CharacterSearch.propTypes = {
   onChange: PropTypes.func.isRequired,
