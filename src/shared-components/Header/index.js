@@ -94,7 +94,7 @@ const Header = ({ onThemeChange, currentTheme }) => {
 
 Header.propTypes = {
   onThemeChange: PropTypes.func.isRequired,
-  currentTheme: PropTypes.shape({}).isRequired
+  currentTheme: PropTypes.string.isRequired
 };
 
 export default Header;
