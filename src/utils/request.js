@@ -16,7 +16,6 @@ export const get = async (url, queryParams = {}) => {
     headers: {
       'Accept': 'application/json'
     },
-    mode: 'cors',
     cache: 'default'
   })
     .then(response => response.json());
