@@ -18,5 +18,12 @@ export const get = async (url, queryParams = {}) => {
     },
     cache: 'default'
   })
-    .then(response => response.json());
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response;
+    })
+    .then(response => response.json())
+    .catch(() => {});
 };
