@@ -39,7 +39,7 @@ const Episodes = () => {
       variables: {
         page: currentPage
       }
-    })
+    });
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Episodes = () => {
   };
 
 
-  const onSearchFiltersChange = (newQueryParams = {}) => {
+  const handleSearchFiltersChange = (newQueryParams = {}) => {
     setQueryParams({
       ...queryParams,
       ...newQueryParams
@@ -66,7 +66,7 @@ const Episodes = () => {
     <Wrapper>
       <EpisodeSearch
         onSearch={searchEpisodes}
-        onChange={onSearchFiltersChange}
+        onChange={handleSearchFiltersChange}
         values={queryParams}
         resultCount={resultCount}
       />

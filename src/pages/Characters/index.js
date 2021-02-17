@@ -1,9 +1,10 @@
 // Dependencies
 import React, { useState, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import styled from 'styled-components';
 
-// Services
-import { CharacterService } from 'services';
+// Queries
+import { CHARACTERS } from 'queries/character';
 
 // Components
 import CharacterSearch from './CharacterSearch';
@@ -18,33 +19,27 @@ const Wrapper = styled.section`
 
 const Characters = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchResultCount, setSearchResultCount] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
-  const [characters, setCharacters] = useState([]);
-  const [characterIsFetching, setCharacterIsFetching] = useState(false);
   const [queryParams, setQueryParams] = useState({});
+  const [getCharacters, {
+    loading,
+    error,
+    data: {
+      characters: {
+        info: {
+          pages: pageCount = 0,
+          count: resultCount = 0
+        } = {},
+        results: characters = []
+      } = {}
+    } = {}
+  }] = useLazyQuery(CHARACTERS);
 
   const searchCharacters = () => {
-    if (characterIsFetching) return;
-
-    setCharacterIsFetching(true);
-
-    CharacterService.searchCharacters({
-      page: currentPage,
-      ...queryParams
-    }).then(response => {
-      const { info, results } = response;
-
-      setSearchResultCount(info.count);
-      setPageCount(info.pages);
-      setCharacters(results);
-
-    })
-    .catch(() => {
-      setSearchResultCount(0);
-    })
-    .finally(() => {
-      setCharacterIsFetching(false);
+    getCharacters({
+      variables: {
+        page: currentPage,
+        ...queryParams
+      }
     });
   };
 
@@ -72,14 +67,14 @@ const Characters = () => {
         onSearch={searchCharacters}
         onChange={handleSearchFiltersChange}
         values={queryParams}
-        resultCount={searchResultCount}
+        resultCount={resultCount}
       />
       <CharacterList
         characters={characters}
-        isFetching={characterIsFetching}
+        isFetching={loading}
       />
       <Pagination
-        isFetching={characterIsFetching}
+        isFetching={loading}
         currentPage={currentPage}
         pageCount={pageCount}
         onPageChange={handlePageChange}
