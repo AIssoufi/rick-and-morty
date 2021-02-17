@@ -1,40 +1,39 @@
 // Dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import { useParams } from "react-router-dom";
 
-// Services
-import { CharacterService } from 'services';
+// Queries
+import { CHARACTER_DETAILS } from 'queries/character';
 
 // Components
 import Details from './Details';
 
 const CharacterDetails = () => {
-  const [character, setCharacter] = useState({});
-  const [characterIsFetching, setCharacterIsFetching] = useState(false);
   const { id: characterId = null } = useParams();
+  const [getCharacter, {
+    loading,
+    error,
+    data: {
+      character = {}
+    } = {}
+  }] = useLazyQuery(CHARACTER_DETAILS);
 
-  const fetchCharacterDetails = (id) => {
-    if (characterIsFetching) return;
-    setCharacterIsFetching(true);
-
-    CharacterService.getCharacterById({
-      id,
-      includeEpisodes: true
-    }).then(response => {
-      setCharacter(response);
-    }).finally(() => {
-      setCharacterIsFetching(false);
+  const fetchCharacterDetails = () => {
+    getCharacter({
+      variables: {
+        id: characterId
+      }
     });
   };
 
-
   useEffect(() => {
-    fetchCharacterDetails(characterId);
+    fetchCharacterDetails();
   }, [characterId])
 
   return (
     <Details
-      isFetching={characterIsFetching}
+      isFetching={loading}
       {...character}
     />
   );
