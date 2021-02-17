@@ -1,9 +1,10 @@
 // Dependencies
 import React, { useEffect, useState } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import styled from 'styled-components';
 
-// Services
-import { EpisodeService } from 'services';
+// Queries
+import { EPISODES_WITH_CHARACTERS } from 'queries/episode';
 
 // Components
 import EpisodeSearch from './EpisodeSearch';
@@ -18,35 +19,27 @@ const Wrapper = styled.section`
 
 const Episodes = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchResultCount, setSearchResultCount] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
-  const [episodes, setEpisodes] = useState([]);
-  const [episodeIsFetching, setEpisodeIsFetching] = useState(false);
   const [queryParams, setQueryParams] = useState({});
+  const [getEpisodes, {
+    loading,
+    error,
+    data: {
+      episodes: {
+        info: {
+          pages: pageCount = 0,
+          count: resultCount = 0
+        } = {},
+        results: episodes = []
+      } = {}
+    } = {}
+  }] = useLazyQuery(EPISODES_WITH_CHARACTERS);
 
   const searchEpisodes = () => {
-    if (episodeIsFetching) return;
-
-    setEpisodeIsFetching(true);
-
-    EpisodeService.searchEpisodes({
-      page: currentPage,
-      includeCharacters: true,
-      ...queryParams
-    }).then(response => {
-      const { info, results } = response;
-
-      setSearchResultCount(info.count);
-      setPageCount(info.pages);
-      setEpisodes(results);
-
+    getEpisodes({
+      variables: {
+        page: currentPage
+      }
     })
-    .catch(() => {
-      setSearchResultCount(0);
-    })
-    .finally(() => {
-      setEpisodeIsFetching(false);
-    });
   };
 
   useEffect(() => {
@@ -75,14 +68,14 @@ const Episodes = () => {
         onSearch={searchEpisodes}
         onChange={onSearchFiltersChange}
         values={queryParams}
-        resultCount={searchResultCount}
+        resultCount={resultCount}
       />
       <EpisodeList
         episodes={episodes}
-        isFetching={episodeIsFetching}
+        isFetching={loading}
       />
       <Pagination
-        isFetching={episodeIsFetching}
+        isFetching={loading}
         currentPage={currentPage}
         pageCount={pageCount}
         onPageChange={handlePageChange}
